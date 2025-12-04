@@ -9,31 +9,29 @@ class AccessibilityWidgets {
     required String label,
     required VoidCallback onPressed,
     String? hint,
-  }) {
-    return Semantics(
-      label: label,
-      hint: hint,
-      button: true,
-      enabled: true,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(label),
-      ),
-    );
-  }
+  }) =>
+      Semantics(
+        label: label,
+        hint: hint,
+        button: true,
+        enabled: true,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          child: Text(label),
+        ),
+      );
 
   /// Creates accessible text with proper semantics
   static Widget accessibleText(
     String text, {
     String? semanticsLabel,
     TextStyle? style,
-  }) {
-    return Semantics(
-      label: semanticsLabel ?? text,
-      child: Text(
-        text,
-        style: style,
-      ),
-    );
-  }
+  }) =>
+      Semantics(
+        label: semanticsLabel ?? text,
+        child: Text(
+          text,
+          style: style,
+        ),
+      );
 }

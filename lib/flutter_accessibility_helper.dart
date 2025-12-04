@@ -22,20 +22,17 @@ library;
 // Core accessibility utilities
 export 'src/accessibility_helper.dart';
 export 'src/accessibility_testing.dart';
-export 'src/focus_manager.dart' show AccessibilityFocusManager;
-export 'src/screen_reader_optimizer.dart';
-
 // Constants and enums
 export 'src/constants/accessibility_constants.dart';
 export 'src/enums/accessibility_enums.dart';
-
 // Exceptions
 export 'src/exceptions/accessibility_exceptions.dart';
-
+export 'src/focus_manager.dart' show AccessibilityFocusManager;
 // Widget extensions and mixins
 export 'src/mixins/accessibility_mixins.dart';
-export 'src/widgets/accessibility_widgets.dart';
-
+export 'src/platform/accessibility_platform_service.dart';
+export 'src/screen_reader_optimizer.dart';
 // Testing utilities
 export 'src/testing/accessibility_test_utils.dart';
 export 'src/testing/semantics_tester.dart';
+export 'src/widgets/accessibility_widgets.dart';

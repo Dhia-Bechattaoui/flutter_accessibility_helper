@@ -1,6 +1,6 @@
 name: flutter_accessibility_helper
 description: Screen reader optimization, focus management, and accessibility testing tools for Flutter applications.
-version: 0.0.1
+version: 0.1.0
 homepage: https://github.com/Dhia-Bechattaoui/flutter_accessibility_helper
 repository: https://github.com/Dhia-Bechattaoui/flutter_accessibility_helper
 issue_tracker: https://github.com/Dhia-Bechattaoui/flutter_accessibility_helper/issues
@@ -24,4 +24,8 @@ dev_dependencies:
   coverage: ^1.0.0
 
 flutter:
-  # No Flutter-specific dependencies for this package
+  plugin:
+    platforms:
+      android:
+        package: com.github.dhia_bechattaoui.flutter_accessibility_helper
+        pluginClass: FlutterAccessibilityHelperPlugin

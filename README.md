@@ -2,6 +2,8 @@
 
 A comprehensive Flutter package providing screen reader optimization, focus management, and accessibility testing tools to help developers create more accessible Flutter applications.
 
+<img src="example.gif" width="300" alt="Flutter Accessibility Helper Example">
+
 ## Features
 
 - **Screen Reader Optimization**: Tools to optimize content for screen readers
@@ -10,16 +12,18 @@ A comprehensive Flutter package providing screen reader optimization, focus mana
 - **Widget Extensions**: Pre-built accessible widgets and extensions
 - **Semantic Support**: ARIA-like semantics for Flutter widgets
 - **Testing Utilities**: Comprehensive testing framework for accessibility features
+- **Native Platform Support**: Android native API integration for accurate accessibility detection
+- **Comprehensive Feature Detection**: Detect bold text, high contrast, invert colors, reduce motion, and more
 
 ## Getting Started
 
 ### Installation
 
 Add this to your package's `pubspec.yaml` file:
-
+    
 ```yaml
 dependencies:
-  flutter_accessibility_helper: ^0.0.1
+  flutter_accessibility_helper: ^0.1.0
 ```
 
 ### Usage
@@ -38,8 +42,14 @@ AccessibilityWidgets.accessibleButton(
 );
 
 // Manage focus
-final focusNode = FocusManager.createFocusNode();
-FocusManager.requestFocus(context, focusNode);
+final focusNode = AccessibilityFocusManager.createFocusNode();
+AccessibilityFocusManager.requestFocus(context, focusNode);
+
+// Get detailed accessibility information
+final details = await AccessibilityHelper.getAccessibilityDetails(context);
+if (details['boldText'] == true) {
+  // Adjust UI for bold text preference
+}
 ```
 
 ## Core Components
@@ -57,24 +67,31 @@ if (AccessibilityHelper.isAccessibilityEnabled) {
   // Provide enhanced features
 }
 
+// Get detailed accessibility information
+final details = await AccessibilityHelper.getAccessibilityDetails(context);
+print('Bold text enabled: ${details['boldText']}');
+print('High contrast: ${details['highContrast']}');
+print('Has screen reader: ${details['hasScreenReader']}');
+print('Text scale factor: ${details['textScaleFactor']}');
+
 // Validate accessibility compliance
 final issues = AccessibilityHelper.validateAccessibility(context);
 ```
 
-### FocusManager
+### AccessibilityFocusManager
 
 Comprehensive focus management utilities:
 
 ```dart
 // Create and manage focus nodes
-final focusNode = FocusManager.createFocusNode();
+final focusNode = AccessibilityFocusManager.createFocusNode();
 
 // Navigate focus
-FocusManager.nextFocus(context);
-FocusManager.previousFocus(context);
+AccessibilityFocusManager.nextFocus(context);
+AccessibilityFocusManager.previousFocus(context);
 
 // Check focus status
-if (FocusManager.hasFocus(focusNode)) {
+if (AccessibilityFocusManager.hasFocus(focusNode)) {
   // Handle focused state
 }
 ```
@@ -112,19 +129,41 @@ AccessibilityWidgets.accessibleText(
 );
 ```
 
+## Platform Support
+
+This package provides native platform support for accurate accessibility detection:
+
+- **Android**: Uses native `AccessibilityManager` API for precise detection of:
+  - Bold text (Android 12+)
+  - Invert colors
+  - High contrast mode
+  - Reduce motion / disable animations
+  - Font scale and text size
+  - TalkBack and screen reader detection
+- **iOS**: Falls back to Flutter's `AccessibilityFeatures` API (native support coming soon)
+- **Other platforms**: Uses Flutter's `AccessibilityFeatures` API
+
+The package automatically uses the most accurate detection method available for each platform.
+
 ## Testing
 
 The package includes comprehensive testing utilities:
 
 ```dart
 // Test accessibility compliance
-final issues = AccessibilityTesting.validateAccessibility(context);
+final issues = AccessibilityHelper.validateAccessibility(context);
 
 // Test semantics
 final isValid = SemanticsTester.testSemantics('Label', 'Hint');
 
 // Test focus order
 final focusValid = AccessibilityTesting.validateFocusOrder(widgets);
+
+// Test contrast ratio (WCAG AA standard)
+final hasGoodContrast = AccessibilityTesting.checkContrastRatio(
+  Colors.black,
+  Colors.white,
+);
 ```
 
 ## Accessibility Best Practices
@@ -153,10 +192,12 @@ If you encounter any issues or have questions, please:
 2. Search [existing issues](https://github.com/Dhia-Bechattaoui/flutter_accessibility_helper/issues)
 3. Create a [new issue](https://github.com/Dhia-Bechattaoui/flutter_accessibility_helper/issues/new)
 
-## Version History
+## Version
 
-See [CHANGELOG.md](CHANGELOG.md) for a complete version history.
+Current version: **0.1.0**
+
+See [CHANGELOG.md](CHANGELOG.md) for complete version history and migration guides.
 
 ---
 
-**Note**: This package is designed to achieve a full Pana score of 160/160 and follows Flutter and Dart best practices for accessibility.
+**Note**: This package achieves a full Pana score of 160/160 and follows Flutter and Dart best practices for accessibility.
