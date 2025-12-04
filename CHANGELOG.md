@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Bold text detection on Android**: Fixed incorrect detection by using `fontWeightAdjustment` API on Android 12+ (API 31+). For older Android versions, now properly falls back to Flutter's `AccessibilityFeatures.boldText` instead of unreliable heuristics
-- **Deprecated API**: Replaced deprecated `SemanticsService.announce()` with `SemanticsService.sendAnnouncement()` for multi-window support
+- **API Compatibility**: Reverted to deprecated `SemanticsService.announce()` method as `sendAnnouncement()` is not yet available in current Flutter SDK (3.38.3). The deprecated method remains the working API and will be updated when `sendAnnouncement()` becomes available in a future Flutter release
 - Fixed async context usage in example app (`use_build_context_synchronously` lint warning)
 - Fixed unnecessary braces in string interpolation
 - Improved error handling in accessibility detection methods

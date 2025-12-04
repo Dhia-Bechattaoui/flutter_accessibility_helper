@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_accessibility_helper/src/platform/accessibility_platform_service.dart';
@@ -20,14 +18,11 @@ class AccessibilityHelper {
   /// AccessibilityHelper.announceToScreenReader('Form submitted successfully');
   /// ```
   static void announceToScreenReader(String message) {
-    final views = ui.PlatformDispatcher.instance.views;
-    if (views.isNotEmpty) {
-      SemanticsService.sendAnnouncement(
-        views.first,
-        message,
-        TextDirection.ltr,
-      );
-    }
+    // Note: Using deprecated announce() method as sendAnnouncement() is not yet
+    // available in the current Flutter SDK. This will be updated when sendAnnouncement
+    // becomes available in a future Flutter release.
+    // ignore: deprecated_member_use
+    SemanticsService.announce(message, TextDirection.ltr);
   }
 
   /// Sets the focus to a specific widget
